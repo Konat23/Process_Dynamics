@@ -1,0 +1,424 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage[spanish]{babel}
+\spanishdecimal{.}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{enumerate}
+\usepackage{tikz} % Dibujar resortes
+\usetikzlibrary{decorations.pathmorphing,patterns}%también para los resortes xd
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+
+\usepackage{float} % Ubicar figuras HERE
+\usepackage{soul}  % Resaltador
+
+\title{\protect\vspace{-0.5cm}\protect\includegraphics[width =6cm]{Logo UIS.png} \\
+Primer Parcial - Dinámica de Procesos}
+\author{Sebastián García Angarita - 2191472\and
+        Juan Sebastián Guerrero Peña - 2190435\and
+        Rafael Santiago Suarez Gil - 2190433\and
+        Luis Fernando Romero Rojas - 2191663 \\ \\
+        \textit{Escuela de Ingeniería Eléctrica, Electrónica y Telecomunicaciones} \\
+        \textit{Universidad Industrial de Santander}\\
+        Bucaramanga, Colombia \\}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{center}\rule{0.9\linewidth}{0.5pt}\end{center}
+\parskip = 12pt
+
+\begin{enumerate}
+\item Desarrollen numéricamente los siguientes modelos matemáticos, grafique los resultados y analícelos:
+\begin{enumerate}
+\item Utilicen los siguientes valores:
+$L = 1.21$; $g = 10$; $a_1 = 2.5$; $a_2 = 5.0$. Asuma condiciones iniciales diferentes de cero para $t(0)$. El modelo es dimensionalmente consistente:
+\begin{equation}
+\begin{split}
+    L^2\ddot{\varphi} - \ddot{\gamma}\sin \varphi + \ddot{\mu}\cos \varphi + \cos \varphi &= 0 \\
+    \frac{a_1+a_2}{a_2L}\ddot{\mu} - \ddot{\varphi}\cos \varphi - \dot{\varphi}^2\sin \varphi &= - \frac{a_1+a_2}{a_2L}g \\
+    \frac{a_1+a_2}{a_2L}\ddot{\gamma} - \ddot{\varphi}\sin \varphi &= \dot{\varphi}^2\cos \varphi
+\end{split}
+\end{equation}
+
+% SOLUCIÓN
+
+
+
+
+
+
+\item $g = 10$; $m_1 = 10$; $m_2 = 30$; $k = 30$; $r_1 = 2.0$. El modelo es dimensionalmente consistente.
+\begin{equation}
+\begin{split}
+    \left(m_1{r_1}^2 + m_2{r_2}^2\right)\ddot{\theta} + 2m_2r_2\dot{r_2}\dot{\theta} + \left(m_1r_1 + m_2r_2\right)g\sin \theta &= 0 \\
+    m_2\ddot{r_2} - m_2r_2{\dot{\theta}}^2 - m_2g\cos \theta + k\left(r_2 - 1.1\right) &= 0
+\end{split}
+\end{equation}
+
+
+
+
+
+
+
+
+
+\item Para el siguiente modelo asuma que $J_1 < J_2 < J_3$. Proponga valores para estos momentos de inercia cumpliendo la desigualdad y analice. Realice al menos cinco simulaciones con diferentes $J$'s manteniendo las mismas condiciones iniciales (que deben ser diferentes a cero, para el tiempo $t_0 = 0$). $\omega_i \equiv \omega_i(t)$,
+\begin{equation}
+\begin{split}
+    J_1\dot{\omega_1} + \left( J_2 - J_3\right)\omega_2\omega_3 &= 0 \\
+    J_2\dot{\omega_2} - \left( J_1 - J_3\right)\omega_1\omega_3 &= 0 \\
+    J_3\dot{\omega_3} + \left( J_1 - J_2\right)\omega_2\omega_1 &= 0
+\end{split}
+\end{equation}
+
+% SOLUCIÓN
+\textbf{Solución}
+
+
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[h]{0.28\linewidth}
+        \includegraphics[width=\linewidth]{plots 1c/plot w1 v1.png}
+        \caption{Comportamiento $\omega_1$}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.28\linewidth}
+        \includegraphics[width=\linewidth]{plots 1c/plot w2 v1.png}
+        \caption{Comportamiento $\omega_2$}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.28\linewidth}
+        \includegraphics[width=\linewidth]{plots 1c/plot w3 v1.png}
+        \caption{Comportamiento $\omega_3$}
+    \end{subfigure}
+    \caption{Graficas versión 1}
+    \label{fig:westminster}
+\end{figure}
+
+
+
+
+
+
+\end{enumerate}
+\item Representen es ESPACIO DE ESTADOS (en caso de que se pueda) los siguientes modelos:
+\begin{enumerate}
+\item Se medirán todas las salidas con sendos sensores junto con las fuentes.
+\begin{equation}
+\begin{split}
+    D\ddot{\varphi} - \ddot{\gamma}\sin \varphi + \ddot{\mu}\cos \varphi + \cos \varphi &= 0 \\
+    A\ddot{\mu} - \ddot{\varphi}\cos \varphi - {\dot{\varphi}}^2\sin \varphi &= C \\
+    B\ddot{\gamma} - \ddot{\varphi}\sin \varphi &= {\dot{\varphi}}^2\cos \varphi
+\end{split}
+\end{equation}
+
+% SOLUCIÓN
+
+
+
+
+
+
+
+
+\item Aquí se medirán simultáneamente todas las salidas con sendos sensores, e incluso las mismas entradas (pero con sensores diferentes y únicos (¡dedicación exclusiva para cada entrada!)).
+
+\begin{equation}
+\begin{split}
+    55\dddot{x}_1-\ddot{x}_2-7\dot{x}_3-5x_2-7\sin(0.1t)=0 \\
+    {\dddot{x}}_2-\ {\ddot{x}}_1\ +18{\dot{x}}_2\ +\ 4x_3\ +\ 7\cosh(0.5t)=0 \\
+    \pi\dddot{x}_3\ -\ 6\ddot{x}_3\ -\ 7\dot{x}_1\ -\ 8x_2\ -\ 3\tan(0.7t) =0 
+\end{split}
+\end{equation}
+
+\textbf{Solución} \\
+Identificamos 3 variables de estado las cuales estan todas como tercera derivadas por lo tanto necesitamos usar cambios de variable para obtener las 6 variables de fase que los complementan:
+\begin{equation}
+\begin{split}
+    y_1 &= \dot{x}_1 \\
+    y_2 &= \dot{x}_2 \\
+    y_3 &= \dot{x}_3 \\
+    z_1 &= \dot{y}_1 \\
+    z_2 &= \dot{y}_2 \\
+    z_3 &= \dot{y}_3 \label{2.b.CambioV}
+\end{split} 
+\end{equation}
+Podemos entonces reescribir las ecuaciones como:
+\begin{align*}
+    55\dot{z}_1-z_2-7y_3-5x_2 &= 7\sin(0.1t) \\
+    {\dot{z}}_2-\ z_1\ +18y_2\ +\ 4x_3\ &=\ -7 \cosh(0.5t) \\
+    \pi\dot{z}_3\ -\ 6\ z_3\ -\ 7\ y_1\ -\ 8x_2\ &=\ 3\tan(0.7t) \   
+\end{align*}
+Si despejamos de cada una de las ecuaciones las derivadas de las variables de estado quedaría:
+ \begin{equation}
+ \begin{split}
+    \dot{z}_1&=\frac{1}{55}z_2+\frac{7}{55}y_3+\frac{5}{55}x_2+\frac{7}{55}\sin(0.1t) \\
+    {\dot{z}}_2&=\ z_1\ -18y_2\ -\ 4x_3\ \ -7\cosh(0.5t)  \\
+    \dot{z}_3\ &=\ \frac{6}{\pi}\ z_3\ +\ \frac{7}{\pi}\ y_1\ +\ \frac{8}{\pi}x_2\ +\ \frac{8}{\pi}\tan(0.7t)
+    \label{1.b.mainV}
+\end{split}
+\end{equation}
+
+Si se usan las ecuaciones (\ref{2.b.CambioV}) y (\ref{1.b.mainV}) podemos formar la matriz: \
+\begin{multline*}
+\begin{bmatrix}
+\dot{z}_1\\ 
+\dot{z}_2\\ 
+\dot{z}_3\\ 
+\dot{y}_1\\ 
+\dot{y}_2\\ 
+\dot{y}_3\\ 
+\dot{x}_1\\ 
+\dot{x}_2\\ 
+\dot{x}_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 &1/55  &0  &0  &0  &7/55  &0  &5/55  &0 \\ 
+1 &0  &0  &0  &-18  &0  &0  &0  &-4 \\ 
+0 &0  &6/\pi &7/\pi   &0  &0  &0  &8/\pi   &0 \\ 
+1 &0  &0  &0  &0  &0  &0  &0  &0 \\ 
+0 &1  &0  &0  &0  &0  &0  &0  &0 \\ 
+0 &0  &1  &0  &0  &0  &0  &0  &0 \\ 
+0 &0  &0  &1  &0  &0  &0  &0  &0 \\ 
+0 &0  &0  &0  &1  &0  &0  &0  &0 \\ 
+0 &0  &0  &0  &0  &1  &0  &0  &0 
+\end{bmatrix}
+\begin{bmatrix}
+z_1\\ 
+z_2\\ 
+z_3\\ 
+y_1\\ 
+y_2\\ 
+y_3\\ 
+x_1\\ 
+x_2\\ 
+x_3
+\end{bmatrix}
+\cdots \\
+\cdots +
+\begin{bmatrix}
+7/55 &0  &0   \\ 
+0 &-7  &0   \\ 
+0 &0  &3/\pi \\
+0  &0  &0 \\
+0  &0  &0 \\
+0  &0  &0 \\
+0  &0  &0 \\
+0  &0  &0 \\
+0  &0  &0 \\
+\end{bmatrix}
+\begin{bmatrix}
+sin(0.1t))\\ 
+cosh(0.5t))\\ 
+tan(0.7t)
+\end{bmatrix}
+\end{multline*}
+La cual tiene la forma de la \textbf{ecuación de estado}: $\dot{x}=Ax+Bu$. \\
+Como se requiere medir todas las salidas y todas las entradas por independiente nuestra ecuación de salida tiene que ser un vector de $12\cdot 1$ donde 9 espacios son ocupados por las variables de estado y 3 por las entradas, tendríamos entonces:
+
+
+\begin{multline*}
+\begin{bmatrix}
+\dot{z}_1\\ 
+\dot{z}_2\\ 
+\dot{z}_3\\ 
+\dot{y}_1\\ 
+\dot{y}_2\\ 
+\dot{y}_3\\ 
+\dot{x}_1\\ 
+\dot{x}_2\\ 
+\dot{x}_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 &0  &0  &0  &0  &0  &0  &0  &0 \\ 
+0 &1  &0  &0  &0  &0  &0  &0  &0 \\ 
+0 &0  &1  &0  &0  &0  &0  &0  &0 \\ 
+0 &0  &0  &1  &0  &0  &0  &0  &0 \\ 
+0 &0  &0  &0  &1  &0  &0  &0  &0 \\ 
+0 &0  &0  &0  &0  &1  &0  &0  &0 \\ 
+0 &0  &0  &0  &0  &0  &1  &0  &0 \\ 
+0 &0  &0  &0  &0  &0  &0  &1  &0 \\ 
+0 &0  &0  &0  &0  &0  &0  &0  &1 \\ 
+0 &0  &0  &0  &0  &0  &0  &0  &0 \\ 
+0 &0  &0  &0  &0  &0  &0  &0  &0 \\ 
+0 &0  &0  &0  &0  &0  &0  &0  &0 
+\end{bmatrix}
+\begin{bmatrix}
+z_1\\ 
+z_2\\ 
+z_3\\ 
+y_1\\ 
+y_2\\ 
+y_3\\ 
+x_1\\ 
+x_2\\ 
+x_3
+\end{bmatrix}
+\cdots \\
+\cdots +
+\begin{bmatrix}
+0 &0  &0   \\ 
+0 &0  &0   \\ 
+0 &0  &0 \\
+0  &0  &0 \\
+0  &0  &0 \\
+0  &0  &0 \\
+0  &0  &0 \\
+0  &0  &0 \\
+0  &0  &0 \\
+1  &0  &0 \\
+0  &1  &0 \\
+0  &0  &1 
+\end{bmatrix}
+\begin{bmatrix}
+sin(0.1t))\\ 
+cosh(0.5t))\\ 
+tan(0.7t)
+\end{bmatrix}
+\end{multline*}
+
+
+
+
+
+
+
+
+
+\item Se medirán simultáneamente todas las salidas con sendos sensores (incluyendo las entradas).
+\begin{equation}
+\begin{split}
+    12{\dddot{x}}_1\ -\ {\ddot{x}}_2\ +\ t{\dot{x}}_5\ -\ 5{\dot{x}}_4\ -\ \sin(0.1t) &=0 \\
+    \dddot{x}_2\ -\ t\ddot{x}_6\ +\ 18\dot{x}_2\ + 4x_3 + x_1 + t \cosh(0.5) &= 0 \\
+    6{\ddot{x}}_5-\ t\ -1{\dot{x}}_1+\ 8{\ddot{x}}_2-\ 3\tan(t + 1)x_6 &= 0\\
+    5{\dddot{x}}_4\ -\ {\ddot{x}}_2\ -\ 7{\ddot{x}}_3\ -\cos(t)x_1\ +\ 0.1 &= 0 \\ 
+    12{\dddot{\ x}}_5-\ {\ddot{x}}_1+\ t\ 3{\dot{x}}_2+\ 4x_4+\ x_3\cosh(t) &=0 \\
+    -t{\dddot{x}}_6\ -\ e\ -5t{\ddot{x}}_3-\ 3{\dot{x}}_1-\ 8x_5+\ t\tan(t + 2) &= 0
+\end{split}
+\end{equation}
+
+% SOLUCIÓN
+
+
+\end{enumerate}
+\item Linealice los siguientes modelos (en caso de ser no-lineales) y resuélvanlos numéricamente. Definan las condiciones de solución del sistema. Grafiquen las soluciones del sistema no-lineal y el
+correspondiente linealizado, y analicen. Incluya todos los pasos de la linealización. 
+\begin{enumerate}
+\item Linealizarlo alrededor del punto de operación: $\bar{x}_1=\bar{x}_2=5$.
+\begin{equation}
+\begin{split}
+    \dddot{x}_1-\ddot{x}_1+18\ddot{x}_2+4x_1+x_2+\cosh(x_1) &= 0 \\ \dddot{x}_2-\ddot{x}_2+18\ddot{x}_1+4x_2+x_1+\sinh(x_2) &= 0
+\end{split}
+\end{equation}
+
+% SOLUCIÓN
+
+
+\item $y(1)=2,\bar{y}=10$
+\begin{equation}
+     \sqrt[]{y}\frac{dy}{dx}+y^{1.5}-1 = 0
+\end{equation}
+    
+\item Para este caso solamente linealizarlo. Punto de operación: $ \bar{x} = \bar{y} = \bar{z} = 1$
+\begin{equation}
+    f(x,y,z)=\cos(x+y)^z+e^{(x+y+z)^2}-\cosh{\sqrt{x+y+z}-\left[\frac{x+y}{z}\right]^x}
+\end{equation}
+
+% SOLUCIÓN
+
+
+
+
+
+\end{enumerate}
+\item Apliquen el método de la impedancia (si es posible) para modelar el siguiente sistema. En caso de no poderse, explicar claramente el por qué no.
+
+Si es viable, deben detallar paso a paso cómo se hizo. No valen respuestas “sorpresa”. El resorte es lineal, tiene una longitud inicial $l_0$ y una constante $k$. La polea tiene un radio $r$, una masa $M$ y un momento de inercia $I = \frac{1}{2}Mr^2$
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{sistema punto 4.png}
+    \caption{Sistema masa-polea-resorte a modelar.}
+    \label{fig:sistema punto 4}
+\end{figure}
+
+Inicialmente definimos el torque (T) de la polea
+    \begin{equation}
+    T=\ddot{\theta}I \left[Nm\right]
+    \end{equation}
+Tenemos que el torque en este caso es igual a la fuerza por el radio de la polea,así que lo escribiremos de la siguiente forma:
+    \begin{equation}
+    \ddot{\theta}\frac{1}{2}Mr^2=Fr
+    \label{torque}
+    \end{equation}
+Ahora, sabemos que podemos obtener la longitud de un arco usando el ángulo y el rádio de este, así: $\theta r=x$.
+En esta expresión si despejamos $\theta$ y derivamos dos veces con respecto al tiempo obtenemos que:
+    \begin{equation}
+    \ddot{\theta}=\frac{\ddot{x}}{r}
+    \label{aceleracionang}
+    \end{equation}
+si reemplazamos (\ref{aceleracionang}) en (\ref{torque}) obtenemos que:
+\begin{equation}
+\notag
+   \frac{\ddot{x}}{r}\frac{1}{2}Mr^2=Fr
+    \end{equation}
+y finalmente al despejar la fuerza obtenemos que: 
+\begin{equation}
+   F=\ddot{x}\frac{1}{2}M  \left[N\right]
+    \end{equation}
+    
+Del método de impedancias mecánicas sabemos que una fuerza de este tipo corresponde a la fuerza sobre una masa, por lo que podemos hacer un modelo equivalente del sistema usando una masa equivalente de $\frac{1}{2}M+m$ [kg].
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+% Supporting structure
+\fill [pattern = north west lines] (-1.5,0) rectangle ++(3,.5);
+\draw (-1.5,0) -- ++(3,0);
+\draw
+[
+    decoration={
+        coil,
+        segment length = 2mm,
+        amplitude = 5mm,
+        aspect = 0.3,
+        post length = 4mm,
+        pre length = 4mm},
+    decorate] (0,0) -- ++(0,-4)
+   node[midway,right=0.5cm,black]{$k$}; 
+% Mass
+\node[draw,
+    fill=yellow!60,
+    minimum width=1cm,
+    minimum height=1cm,
+    anchor=north,
+    label=east:$\frac{1}{2}M+m$] at (0,-4) {};
+    %Elongacion inicial
+    \draw[very thick,
+    red,
+    |-|] (-2,0) -- ++(0,-4)
+    node[midway,left]{\small $l_0$};
+    %Eje de referencia
+    \draw [very thick,
+    blue,
+    -latex
+] (-0.8,-4.5) -- ++(-1,0) ++(0.25,0) -- ++ (0,-1)
+    node[midway,left]{\small $x$};
+ \end{tikzpicture}
+ \caption{Sistema masa-resorte equivalente.}
+\end{figure}
+Aplicando el método de impedancias en el dominio del tiempo tenemos que el sistema se modelaría de la siguiente manera:
+\begin{equation}
+\mathbf{
+    \left(\frac{1}{2}M+m\right)\ddot{x}+kx=0}
+\end{equation}
+
+
+\end{enumerate}
+\end{document}
