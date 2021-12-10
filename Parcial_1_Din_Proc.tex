@@ -16,6 +16,9 @@
 \usepackage{float} % Ubicar figuras HERE
 \usepackage{soul}  % Resaltador
 
+\pagecolor{white}
+\color{black}% set the default colour to white
+
 \title{\protect\vspace{-0.5cm}\protect\includegraphics[width =6cm]{Logo UIS.png} \\
 Primer Parcial - Dinámica de Procesos}
 \author{Sebastián García Angarita - 2191472\and
@@ -31,6 +34,8 @@ Primer Parcial - Dinámica de Procesos}
 \maketitle
 \begin{center}\rule{0.9\linewidth}{0.5pt}\end{center}
 \parskip = 12pt
+
+\hl{TODO: Hacer un listado de las unidades de las variables que se usan. Creo que solo podremos usar unidades en aquellas en la que se nos especifica las variables en las que esta, como el punto 4}
 
 \begin{enumerate}
 \item Desarrollen numéricamente los siguientes modelos matemáticos, grafique los resultados y analícelos:
@@ -80,26 +85,69 @@ $L = 1.21$; $g = 10$; $a_1 = 2.5$; $a_2 = 5.0$. Asuma condiciones iniciales dife
 % SOLUCIÓN
 \textbf{Solución}
 
-
+Estas ecuaciones describen la rotación de un objeto que tiene tres momentos de inercia distintos en sus tres ejes principales.
+Cuando el objeto rota únicamente sobre uno de los ejes, se dice que el objeto está en equilibrio porque la velocidad angular no cambia y permanece igual que la velocidad inicial como se puede ver en la figura \ref{fig:sistema en punto de equilibrio}.
 
 \begin{figure}[h!]
     \centering
+    \hspace{1cm}
     \begin{subfigure}[h]{0.28\linewidth}
-        \includegraphics[width=\linewidth]{plots 1c/plot w1 v1.png}
-        \caption{Comportamiento $\omega_1$}
+        \includegraphics[width=\linewidth]{plots 1c/w0=[1,0,0].png}
+        \caption{\centering Rotación en el primer eje}
     \end{subfigure}
     \begin{subfigure}[h]{0.28\linewidth}
-        \includegraphics[width=\linewidth]{plots 1c/plot w2 v1.png}
-        \caption{Comportamiento $\omega_2$}
+        \includegraphics[width=\linewidth]{plots 1c/w0=[0,1,0].png}
+        \caption{\centering Rotación en el segundo eje}
     \end{subfigure}
     \begin{subfigure}[h]{0.28\linewidth}
-        \includegraphics[width=\linewidth]{plots 1c/plot w3 v1.png}
-        \caption{Comportamiento $\omega_3$}
+        \includegraphics[width=\linewidth]{plots 1c/w0=[0,0,1].png}
+        \caption{\centering Rotación en el tercer eje}
     \end{subfigure}
-    \caption{Graficas versión 1}
-    \label{fig:westminster}
+    \caption{Velocidades angulares cuando el sistema está en un punto de equilibrio}
+    \label{fig:sistema en punto de equilibrio}
 \end{figure}
 
+Estos resultados son intuitivos, sin presencia de fuerzas externas el cuerpo permanece rotando sobre el mismo eje a la misma velocidad.
+
+Ahora un caso más interesante, es cuando el cuerpo tiene una velocidad inicial en el segundo eje, pero tiene perturbaciones muy pequeñas en los otros ejes. Este es el conocido como teorema del eje intermedio.
+
+Para fines del ejercicio, se analiza el comportamiento al cambiar el momento de inercia de los ejes. Por tanto se establecen las siguientes velocidades iniciales de cada eje:
+$\omega_1(0) = 0.001$; $\omega_2(0) = 1$; $\omega_3(0) = 0.001$.
+
+Para el primer caso se establecieron los momentos angulares así:
+$$J_1 = 2;\hspace{0.25cm}$$
+Js = [2 4 7;
+      1 4 7;
+      2 5 7;
+      2 3 7;
+      2 4 9];
+
+\begin{figure}[h!]
+    \centering
+    \hspace{1cm}
+    \begin{subfigure}[h]{0.3\linewidth}
+        \includegraphics[width=\linewidth]{plots 1c/w_i vs t - v1.png}
+        \caption{\centering Rotación en el primer eje}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.3\linewidth}
+        \includegraphics[width=\linewidth]{plots 1c/w_i vs t - v2.png}
+        \caption{\centering Rotación en el segundo eje}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.3\linewidth}
+        \includegraphics[width=\linewidth]{plots 1c/w_i vs t - v3.png}
+        \caption{\centering Rotación en el tercer eje}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.3\linewidth}
+        \includegraphics[width=\linewidth]{plots 1c/w_i vs t - v4.png}
+        \caption{\centering Rotación en el tercer eje}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.3\linewidth}
+        \includegraphics[width=\linewidth]{plots 1c/w_i vs t - v5.png}
+        \caption{\centering Rotación en el tercer eje}
+    \end{subfigure}
+    \caption{Velocidades angulares cuando el sistema está en un punto de equilibrio}
+    \label{fig:sistema en punto de equilibrio}
+\end{figure}
 
 
 
@@ -214,9 +262,9 @@ x_3
 0  &0  &0 \\
 \end{bmatrix}
 \begin{bmatrix}
-sin(0.1t))\\ 
-cosh(0.5t))\\ 
-tan(0.7t)
+\sin(0.1t)\\ 
+\cosh(0.5t)\\ 
+\tan(0.7t)
 \end{bmatrix}
 \end{multline*}
 La cual tiene la forma de la \textbf{ecuación de estado}: $\dot{x}=Ax+Bu$. \\
@@ -225,24 +273,15 @@ Como se requiere medir todas las salidas y todas las entradas por independiente 
 
 \begin{multline*}
 \begin{bmatrix}
-\dot{z}_1\\ 
-\dot{z}_2\\ 
-\dot{z}_3\\ 
-\dot{y}_1\\ 
-\dot{y}_2\\ 
-\dot{y}_3\\ 
-\dot{x}_1\\ 
-\dot{x}_2\\ 
-\dot{x}_3
+\ y_1\\ 
+\ y_2\\ 
+\ y_3\\ 
+\ y_4\\ 
+\ y_5\\ 
+\ y_6
 \end{bmatrix}
 =
 \begin{bmatrix}
-1 &0  &0  &0  &0  &0  &0  &0  &0 \\ 
-0 &1  &0  &0  &0  &0  &0  &0  &0 \\ 
-0 &0  &1  &0  &0  &0  &0  &0  &0 \\ 
-0 &0  &0  &1  &0  &0  &0  &0  &0 \\ 
-0 &0  &0  &0  &1  &0  &0  &0  &0 \\ 
-0 &0  &0  &0  &0  &1  &0  &0  &0 \\ 
 0 &0  &0  &0  &0  &0  &1  &0  &0 \\ 
 0 &0  &0  &0  &0  &0  &0  &1  &0 \\ 
 0 &0  &0  &0  &0  &0  &0  &0  &1 \\ 
@@ -264,12 +303,6 @@ x_3
 \cdots \\
 \cdots +
 \begin{bmatrix}
-0 &0  &0   \\ 
-0 &0  &0   \\ 
-0 &0  &0 \\
-0  &0  &0 \\
-0  &0  &0 \\
-0  &0  &0 \\
 0  &0  &0 \\
 0  &0  &0 \\
 0  &0  &0 \\
@@ -278,9 +311,9 @@ x_3
 0  &0  &1 
 \end{bmatrix}
 \begin{bmatrix}
-sin(0.1t))\\ 
-cosh(0.5t))\\ 
-tan(0.7t)
+\sin(0.1t)\\ 
+\cosh(0.5t)\\ 
+\tan(0.7t)
 \end{bmatrix}
 \end{multline*}
 
@@ -316,16 +349,101 @@ correspondiente linealizado, y analicen. Incluya todos los pasos de la linealiza
 \begin{split}
     \dddot{x}_1-\ddot{x}_1+18\ddot{x}_2+4x_1+x_2+\cosh(x_1) &= 0 \\ \dddot{x}_2-\ddot{x}_2+18\ddot{x}_1+4x_2+x_1+\sinh(x_2) &= 0
 \end{split}
+\label{mod1}
 \end{equation}
 
 % SOLUCIÓN
+\textbf{Solución:}
+El modelo es no lineal debido al coseno y al seno hiperbólico que afecta a las variables dependientes, para linealizar al rededor de $\bar{x}_1=\bar{x}_2=5$ hacemos $x_1=\delta x_1+5$ y $x_2=\delta x_2+5$ donde $\delta x_1$ y $\delta x_2$ son pequeñas excursiones al rededor de $\bar{x}_1=\bar{x}_2=5$
 
+\begin{equation}
+    \notag
+    \cosh(x_1)\simeq \frac{\cosh(5)}{0!}+\frac{\senh(5)}{1!}\left(x_1-5\right)+\frac{\cosh(5)}{2!}\left(x_1-5\right)^2+\frac{\senh(5)}{3!}\left(x_1-5\right)^3+ \cdots
+\end{equation}
+\begin{equation}
+    \notag
+    \senh(x_2)\simeq \frac{\senh(5)}{0!}+\frac{\cosh(5)}{1!}\left(x_2-5\right)+\frac{\senh(5)}{2!}\left(x_2-5\right)^2+\frac{\cosh(5)}{3!}\left(x_2-5\right)^3+ \cdots
+\end{equation}
+
+Ya que buscamos linealizar el modelo tomaremos solamente los dos primeros términos de la sumatoria, es decir:
+\begin{equation}
+    \notag
+    \cosh(x_1)\simeq \frac{\cosh(5)}{0!}+\frac{\senh(5)}{1!}\left(x_1-5\right)
+\end{equation}
+\begin{equation}
+    \notag
+    \senh(x_2)\simeq \frac{\senh(5)}{0!}+\frac{\cosh(5)}{1!}\left(x_2-5\right)
+\end{equation}
+
+Al resolver obtenemos que
+
+\begin{equation}
+    \cosh(x_1)\simeq 74.203x_1-296.805
+    \label{cosh}
+\end{equation}
+
+\begin{equation}
+    \senh(x_2)\simeq 74.21x_2-296.847
+    \label{senh}
+\end{equation}
+
+El nuevo modelo obtenido al reemplazar (\ref{cosh}) y (\ref{senh}) en (\ref{mod1}) es:
+
+\begin{equation}
+\begin{split}
+    \dddot{x}_1-\ddot{x}_1+18\ddot{x}_2+4x_1+x_2+74.203x_1-296.805 &= 0 \\ \dddot{x}_2-\ddot{x}_2+18\ddot{x}_1+4x_2+x_1+74.21x_2-296.847 &= 0
+\end{split}
+\end{equation}
 
 \item $y(1)=2,\bar{y}=10$
 \begin{equation}
      \sqrt[]{y}\frac{dy}{dx}+y^{1.5}-1 = 0
 \end{equation}
-    
+% SOLUCIÓN
+\textbf{Solución:}
+El modelo es no lineal debido al producto la raíz de la variable dependiente con la derivada de la variable dependiente y por el término $y^1.5$.
+Para ver mejor el sistema cambiamos la notación así:
+
+\begin{equation}
+     y^{\frac{1}{2}}\dot{y}+y^{\frac{3}{2}}-1 = 0
+     \label{3bnotacion}
+\end{equation}
+
+Si dividimos (\ref{3bnotacion}) entre $y^{\frac{1}{2}}$ obtenemos:
+
+\begin{equation}
+     \dot{y}+y-y^{-\frac{1}{2}} = 0
+     \label{3bdivid}
+\end{equation}
+
+En (\ref{3bdivid}) vemos que el único término no líneal es $-y^{-\frac{1}{2}}$ así que procedemos a linealizarlo haciendo uso de las series de Taylor asumiendo los puntos de operación indicados.
+
+\begin{equation}
+    y^{-\frac{1}{2}}\simeq \frac{10^{-\frac{1}{2}}}{0!}-\frac{10^{-\frac{3}{2}}}{{2(1!)}}(y-10)+3\frac{10^{-\frac{5}{2}}}{{4(2!)}}(y-10)^2+...
+    \label{3bsumat}
+\end{equation}
+
+Ya que buscamos linealizar el modelo tomaremos solamente los dos primeros términos de la sumatoria (\ref{3bsumat}), es decir:
+
+\begin{equation}
+    y^{-\frac{1}{2}}\simeq \frac{10^{-\frac{1}{2}}}{0!}-\frac{10^{-\frac{3}{2}}}{{2(1!)}}(y-10)
+    \label{3bsumatsimplif}
+\end{equation}
+
+Al simplificar (\ref{3bsumatsimplif}) obtenemos que:
+
+\begin{equation}
+    y^{-\frac{1}{2}}\simeq 0.4743-0.0158y
+    \label{3by-1/2}
+\end{equation}
+
+Reemplazando (\ref{3by-1/2}) en (\ref{3bdivid}) obtenemos el modelo equivalente linealizado que sería:
+
+
+\begin{equation}
+    \dot{y}+1.0158y-0.4743=0
+\end{equation}
+
 \item Para este caso solamente linealizarlo. Punto de operación: $ \bar{x} = \bar{y} = \bar{z} = 1$
 \begin{equation}
     f(x,y,z)=\cos(x+y)^z+e^{(x+y+z)^2}-\cosh{\sqrt{x+y+z}-\left[\frac{x+y}{z}\right]^x}
