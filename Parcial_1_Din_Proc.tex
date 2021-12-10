@@ -1,8 +1,8 @@
 \documentclass[letterpaper, 12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsfonts}
-\usepackage[spanish]{babel}
-\spanishdecimal{.}
+\usepackage[spanish,es-tabla]{babel}
+\spanishdecimal{.} % Usar . como separador de decimal
 \usepackage{algorithmic}
 \usepackage{graphicx}
 \usepackage{subcaption}
@@ -15,9 +15,6 @@
 
 \usepackage{float} % Ubicar figuras HERE
 \usepackage{soul}  % Resaltador
-
-\pagecolor{white}
-\color{black}% set the default colour to white
 
 \title{\protect\vspace{-0.5cm}\protect\includegraphics[width =6cm]{Logo UIS.png} \\
 Primer Parcial - Dinámica de Procesos}
@@ -37,6 +34,22 @@ Primer Parcial - Dinámica de Procesos}
 
 \hl{TODO: Hacer un listado de las unidades de las variables que se usan. Creo que solo podremos usar unidades en aquellas en la que se nos especifica las variables en las que esta, como el punto 4}
 
+\begin{table}[H]
+\centering
+\begin{tabular}{c|c|c}
+    \hline
+    \hl{Nombre} & Símbolo & Unidades (SI) \\
+    \hline
+    Masa & $M$ & $\mathrm{kg}$ \\
+    Constante de Resorte & $K$ & $\mathrm{N/m}$ \\
+    Velocidad Angular & $\omega$ & $\mathrm{rad/s}$ \\
+    Momento de Inercia & $J$ & $\mathrm{kg\cdot m^2}$ \\
+    
+\end{tabular}
+\caption{Unidades de \hl{variables} usadas en el documento}
+\label{tab:my_label}
+\end{table}
+
 \begin{enumerate}
 \item Desarrollen numéricamente los siguientes modelos matemáticos, grafique los resultados y analícelos:
 \begin{enumerate}
@@ -51,6 +64,10 @@ $L = 1.21$; $g = 10$; $a_1 = 2.5$; $a_2 = 5.0$. Asuma condiciones iniciales dife
 \end{equation}
 
 % SOLUCIÓN
+\textbf{Solución}
+Para solucionar el sistema se usó MATLAB y Simulink
+
+
 
 
 
@@ -109,45 +126,81 @@ Cuando el objeto rota únicamente sobre uno de los ejes, se dice que el objeto e
 
 Estos resultados son intuitivos, sin presencia de fuerzas externas el cuerpo permanece rotando sobre el mismo eje a la misma velocidad.
 
-Ahora un caso más interesante, es cuando el cuerpo tiene una velocidad inicial en el segundo eje, pero tiene perturbaciones muy pequeñas en los otros ejes. Este es el conocido como teorema del eje intermedio.
+Ahora un caso más interesante, es cuando el cuerpo rota sobre el eje intermedio, esta rotación es inestable y  se afecta con incluso pequeñas perturbaciones. Este es el conocido como teorema del eje intermedio o efecto de Dzhanibekov.
 
-Para fines del ejercicio, se analiza el comportamiento al cambiar el momento de inercia de los ejes. Por tanto se establecen las siguientes velocidades iniciales de cada eje:
+Para fines del ejercicio, se establecen las siguientes velocidades iniciales de cada eje:
 $\omega_1(0) = 0.001$; $\omega_2(0) = 1$; $\omega_3(0) = 0.001$.
+Y se analiza el comportamiento de las rotaciones al cambiar el momento de inercia de los ejes.
+Se establecieron las 5 siguientes distintas configuraciones:
 
-Para el primer caso se establecieron los momentos angulares así:
-$$J_1 = 2;\hspace{0.25cm}$$
-Js = [2 4 7;
-      1 4 7;
-      2 5 7;
-      2 3 7;
-      2 4 9];
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+    \hline
+    Configuración & $J_1$ & $J_2$ & $J_3$ \\
+    \hline
+    1   & $2$   & $4$   & $7$   \\
+    2   & $1$   & $4$   & $7$   \\
+    3   & $2$   & $5$   & $7$   \\
+    4   & $2$   & $3$   & $7$   \\
+    5   & $2$   & $4$   & $9$   \\
+    \hline
+\end{tabular}
+\caption{Distintas configuraciones de momentos de inercia}
+\label{tab:configuraciones de momentos de inercia}
+\end{table}
 
-\begin{figure}[h!]
+En la Figura \ref{fig:configuraciones de momentos de inercia} se grafican las velocidades angulares de cada eje para cada una de las configuraciones de momentos de inercia.
+
+\begin{figure}[H]
     \centering
-    \hspace{1cm}
-    \begin{subfigure}[h]{0.3\linewidth}
+    \begin{subfigure}[H]{0.45\linewidth}
         \includegraphics[width=\linewidth]{plots 1c/w_i vs t - v1.png}
-        \caption{\centering Rotación en el primer eje}
+        \caption{\centering Configuración 1}
+        \label{fig:config 1}
     \end{subfigure}
-    \begin{subfigure}[h]{0.3\linewidth}
+    \hspace{0.5cm}
+    \begin{subfigure}[H]{0.45\linewidth}
         \includegraphics[width=\linewidth]{plots 1c/w_i vs t - v2.png}
-        \caption{\centering Rotación en el segundo eje}
+        \caption{\centering Configuración 2}
+        \label{fig:config 2}
     \end{subfigure}
-    \begin{subfigure}[h]{0.3\linewidth}
+    \newpage
+    \begin{subfigure}[H]{0.45\linewidth}
         \includegraphics[width=\linewidth]{plots 1c/w_i vs t - v3.png}
-        \caption{\centering Rotación en el tercer eje}
+        \caption{\centering Configuración 3}
+        \label{fig:config 3}
     \end{subfigure}
-    \begin{subfigure}[h]{0.3\linewidth}
+    \hspace{0.5cm}
+    \begin{subfigure}[H]{0.45\linewidth}
         \includegraphics[width=\linewidth]{plots 1c/w_i vs t - v4.png}
-        \caption{\centering Rotación en el tercer eje}
+        \caption{\centering Configuración 4}
+        \label{fig:config 4}
     \end{subfigure}
-    \begin{subfigure}[h]{0.3\linewidth}
+    \\
+    \begin{subfigure}[H]{0.45\linewidth}
         \includegraphics[width=\linewidth]{plots 1c/w_i vs t - v5.png}
-        \caption{\centering Rotación en el tercer eje}
+        \caption{\centering Configuración 5}
+        \label{fig:config 5}
     \end{subfigure}
     \caption{Velocidades angulares cuando el sistema está en un punto de equilibrio}
-    \label{fig:sistema en punto de equilibrio}
+    \label{fig:configuraciones de momentos de inercia}
 \end{figure}
+
+Tomando la configuración 1 como la configuración de referencia. Si se hace una comparación con la configuración 2, en este caso el momento de inercia $J_1$ disminuye. En principio se sabe que para un menor momento de inercia es más fácil rotar y obtener una mayor velocidad angular, y como se puede comparar en las gráficas \ref{fig:config 1} y \ref{fig:config 2}, la velocidad angular $\omega_1$ alcanza un valor máximo mayor respecto a la configuración base.
+Como el efecto de Dzhanibekov ocurre en ese primer eje con menor momento de inercia. Si ahora el momento de inercia es menor, es más fácil hacerlo rotar en ese eje para la misma pequeña perturbación, por lo que es válido afirmar que va a rotar con mayor frecuencia como se ve en las gráficas.
+\\ \\
+Comparando ahora las configuraciones 3 y 4 respecto a la configuración 1, en estas configuraciones cambia el momento de inercia $J_2$
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -268,7 +321,7 @@ x_3
 \end{bmatrix}
 \end{multline*}
 La cual tiene la forma de la \textbf{ecuación de estado}: $\dot{x}=Ax+Bu$. \\
-Como se requiere medir todas las salidas y todas las entradas por independiente nuestra ecuación de salida tiene que ser un vector de $12\cdot 1$ donde 9 espacios son ocupados por las variables de estado y 3 por las entradas, tendríamos entonces:
+Como se requiere medir todas las salidas y todas las entradas por independiente nuestra ecuación de salida tiene que ser un vector de $6\cdot 1$ donde 3 espacios son ocupados por las variables de estado $x_1, x_2$ y $x_3$ y 3 por las entradas, tendríamos entonces:
 
 
 \begin{multline*}
@@ -319,25 +372,33 @@ x_3
 
 
 
-
-
-
-
-
-
 \item Se medirán simultáneamente todas las salidas con sendos sensores (incluyendo las entradas).
 \begin{equation}
 \begin{split}
     12{\dddot{x}}_1\ -\ {\ddot{x}}_2\ +\ t{\dot{x}}_5\ -\ 5{\dot{x}}_4\ -\ \sin(0.1t) &=0 \\
     \dddot{x}_2\ -\ t\ddot{x}_6\ +\ 18\dot{x}_2\ + 4x_3 + x_1 + t \cosh(0.5) &= 0 \\
-    6{\ddot{x}}_5-\ t\ -1{\dot{x}}_1+\ 8{\ddot{x}}_2-\ 3\tan(t + 1)x_6 &= 0\\
+    6{\ddot{x}}_5-\ t^{-1}{\dot{x}}_1+\ 8{\ddot{x}}_2-\ 3\tan(t + 1)x_6 &= 0\\
     5{\dddot{x}}_4\ -\ {\ddot{x}}_2\ -\ 7{\ddot{x}}_3\ -\cos(t)x_1\ +\ 0.1 &= 0 \\ 
-    12{\dddot{\ x}}_5-\ {\ddot{x}}_1+\ t\ 3{\dot{x}}_2+\ 4x_4+\ x_3\cosh(t) &=0 \\
-    -t{\dddot{x}}_6\ -\ e\ -5t{\ddot{x}}_3-\ 3{\dot{x}}_1-\ 8x_5+\ t\tan(t + 2) &= 0
+    12{\dddot{\ x}}_5-\ {\ddot{x}}_1+\ t^{3}{\dot{x}}_2+\ 4x_4+\ x_3\cosh(t) &=0 \\
+    -t{\dddot{x}}_6\ -\ e^{-5t}{\ddot{x}}_3-\ 3{\dot{x}}_1-\ 8x_5+\ t\tan(t + 2) &= 0
+    \label{2.c:main}
 \end{split}
 \end{equation}
 
-% SOLUCIÓN
+\textbf{Solución} \\ 
+Inspeccionando las ecuaciones vemos que todas son de orden 3 a exepcion de la tercera ecuación, esta tienen un orden de dos tanto para $x_5$ como para $x_2$ como orden máximo, para poder repesentar en variable de estados requerimos despejar la de mayor orden para que quede en términos de las demás, elegiremos $x_5$ para ser despejada. Al despeja todas las ecuaciones de (\ref{2.c:main}) de la forma mencionada, nos queda:
+
+\begin{equation}
+\begin{split}
+    {\dddot{x}}_1\ &=\ \frac{1}{12}{\ddot{x}}_2\ -\ \frac{t}{12}{\dot{x}}_5\ +\frac{5}{12}{\dot{x}}_4+ \frac{1}{12} \sin(0.1t)  \\
+    \dddot{x}_2\ &= \ t\ddot{x}_6\ -\ 18\dot{x}_2\ - 4x_3 - x_1 - t \cosh(0.5) \\
+    {\ddot{x}}_5\ &=\ \frac{t^{-1}}{6}{\dot{x}}_1-\ \frac{8}{6}{\ddot{x}}_2+\ \frac{3}{6}\tan(t + 1)x_6 \\
+    {\dddot{x}}_4\ &=\ \frac{1}{5}{\ddot{x}}_2\ +\ \frac{7}{5}{\ddot{x}}_3\ +\frac{1}{5}\cos(t)x_1\ -\frac{0.1}{5}  \\ 
+    {\dddot{\ x}}_5\ &=\ \frac{1}{12}{\ddot{x}}_1-\ \frac{t^{3}}{12}{\dot{x}}_2-\ \frac{4}{12}x_4-\ \frac{1}{12}x_3\cosh(t)  \\
+    {\dddot{x}}_6\ &= - \frac{e^{-5t}}{t} {\ddot{x}}_3-\ \frac{3}{t}{\dot{x}}_1-\ \frac{8}{t}x_5+\ \tan(t + 2) 
+    \label{2.c:despejada}
+\end{split}
+\end{equation}
 
 
 \end{enumerate}
@@ -357,42 +418,61 @@ correspondiente linealizado, y analicen. Incluya todos los pasos de la linealiza
 El modelo es no lineal debido al coseno y al seno hiperbólico que afecta a las variables dependientes, para linealizar al rededor de $\bar{x}_1=\bar{x}_2=5$ hacemos $x_1=\delta x_1+5$ y $x_2=\delta x_2+5$ donde $\delta x_1$ y $\delta x_2$ son pequeñas excursiones al rededor de $\bar{x}_1=\bar{x}_2=5$
 
 \begin{equation}
+\notag
+\begin{split}
+    \frac{d^3(\delta x_1 + 5)}{dt^3}-\frac{d^2(\delta x_1 + 5)}{dt^2}+18\frac{d^2(\delta x_2 + 5)}{dt^2}+4(\delta x_1 + 5)+\delta x_2 + 5+\cosh(\delta x_1 + 5) &= 0 \\ \frac{d^3(\delta x_2 + 5)}{dt^3}-\frac{d^2(\delta x_2 + 5)}{dt^2}+18\frac{d^2(\delta x_1 + 5)}{dt^2}+4(\delta x_2 + 5)+\delta x_1 + 5+\senh(\delta x_2 + 5) &= 0
+\end{split}
+\end{equation}
+
+Simplificando obtenemos:
+
+\begin{equation}
+\begin{split}
+    \dddot{\delta x_1}-\ddot{\delta x_1}+18\ddot{\delta x_2}+4\delta x_1 +\delta x_2 + 25+\cosh(\delta x_1 + 5) &= 0 \\ \dddot{\delta x_2}-\ddot{\delta x_2}+18\ddot{\delta x_1}+4\delta x_2 +\delta x_1 + 25+\senh(\delta x_2 + 5) &= 0 
+\end{split}
+\label{nuevomod3a}
+\end{equation}
+
+Para linealizar las funciones seno y coseno hiperbólico hacemos uso de las series de Taylor: 
+
+\begin{equation}
     \notag
-    \cosh(x_1)\simeq \frac{\cosh(5)}{0!}+\frac{\senh(5)}{1!}\left(x_1-5\right)+\frac{\cosh(5)}{2!}\left(x_1-5\right)^2+\frac{\senh(5)}{3!}\left(x_1-5\right)^3+ \cdots
+    \cosh(\delta x_1 + 5)\simeq \frac{\cosh(5)}{0!}+\frac{\senh(5)}{1!}\left(\delta x_5\right)+\frac{\cosh(5)}{2!}\left(\delta x_1\right)^2+\frac{\senh(5)}{3!}\left(\delta x_1\right)^3+ \cdots
 \end{equation}
 \begin{equation}
     \notag
-    \senh(x_2)\simeq \frac{\senh(5)}{0!}+\frac{\cosh(5)}{1!}\left(x_2-5\right)+\frac{\senh(5)}{2!}\left(x_2-5\right)^2+\frac{\cosh(5)}{3!}\left(x_2-5\right)^3+ \cdots
+    \senh(\delta x_2 + 5)\simeq \frac{\senh(5)}{0!}+\frac{\cosh(5)}{1!}\left(\delta x_2\right)+\frac{\senh(5)}{2!}\left(\delta x_2\right)^2+\frac{\cosh(5)}{3!}\left(\delta x_2\right)^3+ \cdots
 \end{equation}
 
 Ya que buscamos linealizar el modelo tomaremos solamente los dos primeros términos de la sumatoria, es decir:
 \begin{equation}
     \notag
-    \cosh(x_1)\simeq \frac{\cosh(5)}{0!}+\frac{\senh(5)}{1!}\left(x_1-5\right)
+    \cosh(\delta x_1 + 5)\simeq \frac{\cosh(5)}{0!}+\frac{\senh(5)}{1!}\left(\delta x_1\right)
 \end{equation}
 \begin{equation}
     \notag
-    \senh(x_2)\simeq \frac{\senh(5)}{0!}+\frac{\cosh(5)}{1!}\left(x_2-5\right)
+    \senh(\delta x_2 + 5)\simeq \frac{\senh(5)}{0!}+\frac{\cosh(5)}{1!}\left(\delta x_2\right)
 \end{equation}
 
 Al resolver obtenemos que
 
 \begin{equation}
-    \cosh(x_1)\simeq 74.203x_1-296.805
+    \cosh(\delta x_1 + 5)\simeq 74.203\delta x_1+74.21
     \label{cosh}
 \end{equation}
 
 \begin{equation}
-    \senh(x_2)\simeq 74.21x_2-296.847
+    \senh(\delta x_2 + 5)\simeq 74.21\delta x_2+74.203
     \label{senh}
 \end{equation}
 
-El nuevo modelo obtenido al reemplazar (\ref{cosh}) y (\ref{senh}) en (\ref{mod1}) es:
+El nuevo modelo obtenido al reemplazar (\ref{cosh}) y (\ref{senh}) en (\ref{nuevomod3a}) es:
 
 \begin{equation}
 \begin{split}
-    \dddot{x}_1-\ddot{x}_1+18\ddot{x}_2+4x_1+x_2+74.203x_1-296.805 &= 0 \\ \dddot{x}_2-\ddot{x}_2+18\ddot{x}_1+4x_2+x_1+74.21x_2-296.847 &= 0
+    \dddot{\delta x_1}-\ddot{\delta x_1}+18\ddot{\delta x_2}+4\delta x_1 +\delta x_2 +74.203\delta x_1+99.21 &= 0 \\ \dddot{\delta x_2}-\ddot{\delta x_2}+18\ddot{\delta x_1}+4\delta x_2 +\delta x_1 +74.21\delta x_2+99.203 &= 0 
 \end{split}
+\label{nuevomod3a}
 \end{equation}
 
 \item $y(1)=2,\bar{y}=10$
