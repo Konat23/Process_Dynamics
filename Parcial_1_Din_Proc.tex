@@ -32,13 +32,13 @@ Primer Parcial - Dinámica de Procesos}
 \begin{center}\rule{0.9\linewidth}{0.5pt}\end{center}
 \parskip = 12pt
 
-\hl{TODO: Hacer un listado de las unidades de las variables que se usan. Creo que solo podremos usar unidades en aquellas en la que se nos especifica las variables en las que esta, como el punto 4}
+Todas las unidades de las variables usadas en algunos de los ejercicios corresponden a las establecidas en el sistema internacional de unidades (SI). En la siguiente tabla se resumen
 
 \begin{table}[H]
 \centering
-\begin{tabular}{c|c|c}
+\begin{tabular}{l|c|c}
     \hline
-    \hl{Nombre} & Símbolo & Unidades (SI) \\
+    Nombre \hspace{3cm} & Símbolo & Unidades (SI) \\
     \hline
     Masa & $M$ & $\mathrm{kg}$ \\
     Constante de Resorte & $K$ & $\mathrm{N/m}$ \\
@@ -46,7 +46,7 @@ Primer Parcial - Dinámica de Procesos}
     Momento de Inercia & $J$ & $\mathrm{kg\cdot m^2}$ \\
     
 \end{tabular}
-\caption{Unidades de \hl{variables} usadas en el documento}
+\caption{Unidades de las variables usadas en los ejercicios.}
 \label{tab:my_label}
 \end{table}
 
@@ -65,7 +65,11 @@ $L = 1.21$; $g = 10$; $a_1 = 2.5$; $a_2 = 5.0$. Asuma condiciones iniciales dife
 
 % SOLUCIÓN
 \textbf{Solución}
-Para solucionar el sistema se usó MATLAB y Simulink
+Para solucionar el sistema se usó MATLAB y Simulink, se establecieron las siguientes condiciones iniciales:
+$\varphi(0) = 2$; $\dot{\varphi}(0) = 1$; $\mu(0) = 1$; $\dot{\mu}(0) = 2$; $\gamma(0) = 3$; $\dot{\gamma}(0) = 1$.
+
+
+
 
 
 
@@ -105,7 +109,7 @@ Para solucionar el sistema se usó MATLAB y Simulink
 Estas ecuaciones describen la rotación de un objeto que tiene tres momentos de inercia distintos en sus tres ejes principales.
 Cuando el objeto rota únicamente sobre uno de los ejes, se dice que el objeto está en equilibrio porque la velocidad angular no cambia y permanece igual que la velocidad inicial como se puede ver en la figura \ref{fig:sistema en punto de equilibrio}.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \hspace{1cm}
     \begin{subfigure}[h]{0.28\linewidth}
@@ -190,20 +194,13 @@ En la Figura \ref{fig:configuraciones de momentos de inercia} se grafican las ve
 Tomando la configuración 1 como la configuración de referencia. Si se hace una comparación con la configuración 2, en este caso el momento de inercia $J_1$ disminuye. En principio se sabe que para un menor momento de inercia es más fácil rotar y obtener una mayor velocidad angular, y como se puede comparar en las gráficas \ref{fig:config 1} y \ref{fig:config 2}, la velocidad angular $\omega_1$ alcanza un valor máximo mayor respecto a la configuración base.
 Como el efecto de Dzhanibekov ocurre en ese primer eje con menor momento de inercia. Si ahora el momento de inercia es menor, es más fácil hacerlo rotar en ese eje para la misma pequeña perturbación, por lo que es válido afirmar que va a rotar con mayor frecuencia como se ve en las gráficas.
 \\ \\
-Comparando ahora las configuraciones 3 y 4 respecto a la configuración 1, en estas configuraciones cambia el momento de inercia $J_2$
-
-
-
-
-
-
-
-
-
-
-
-
-
+En resumen, de todas las configuraciones se puede concluir:
+\begin{itemize}
+    \item Las rotaciones en puntos de equilibrio son estables, el objeto permanece rotando con velocidad constante sobre el mismo eje.
+    \item La rotación sobre el eje intermedio es inestable, una pequeña perturbación puede hacer rota el objeto 
+    \item Cuando la diferencia entre $J_1$ y $J_2$ mayor, es cuando el sistema es más inestable. Como el objeto principalmente rota sobre el eje intermedio, si $J_1$ es mucho menor, es más fácil que empiece a rotar en ese eje.
+    \item Cuando la diferencia de momentos de inercia del primer eje $J_1$ y el tercer eje $J_3$ es mayor, el efecto ocurre más frecuente, pero como el objeto rota principalmente sobre el eje intermedio, el impacto que tiene esta mayor diferencia de momentos de inercia es menor comparado con el caso anterior.
+\end{itemize}
 
 
 \end{enumerate}
@@ -219,13 +216,62 @@ Comparando ahora las configuraciones 3 y 4 respecto a la configuración 1, en es
 \end{equation}
 
 % SOLUCIÓN
+\textbf{Solución}
 
+En las ecuaciones del sistema se nota que en una misma ecuación aparecen varias derivadas del mayor orden. Para hacer una representación, es necesario transformar el sistema a su forma normal, por lo que es necesario manipular las ecuaciones.
 
+Se procede a despejar $\ddot{\mu}$ y $\ddot{\gamma}$ de la segunda y tercera ecuación respectivamente
 
+\begin{equation*}
+    \ddot{\mu} = \frac{1}{A}\left(C + \ddot{\varphi}\cos \varphi + {\dot{\varphi}}^2\sin\varphi\right)
+\end{equation*}
+\begin{equation*}
+    \ddot{\gamma} = \frac{1}{B}\left( \ddot{\varphi}\sin\varphi + {\dot{\varphi}}^2\cos\varphi \right)
+\end{equation*}
 
+También es necesario estableces algunas variables de fase:
+\begin{align*}
+    x_1 &= \varphi & x_3 &= \mu & x_5 &= \gamma \\
+    x_2 &= \dot{x}_1 = \dot{\varphi} & x_4 &= \dot{x}_3 = \dot{\mu} & x_6 &= \dot{x}_5 = \dot{\gamma} \\
+\end{align*}
 
+Al remplazar en la primera ecuación del sistema se puede obtener $\ddot{\varphi}$ siendo esta la derivada de mayor orden:
 
+\begin{equation}
+    \dot{x}_2 = \frac{AB}{ABD - A\sin^2 x_1 + B\cos^2 x_1} \left[ \frac{A-B}{AB}{x_2}^2\sin x_1\cos x_1 -\frac{A+C}{A}\cos x_1\right]
+\end{equation}
 
+Remplazando ahora $\dot{x}_2$ en $\dot{x}_4$ y $\dot{x}_6$
+\begin{multline}
+    \dot{x}_4 = \frac{ABD - A\sin^2 x_1 + B\cos^2 x_1 + (A^2-AB)\cos^2 x_1}{A^2BD-A^2\sin^2 x_1 + AB\cos^2 x_1} {x_2}^2\sin x_1 + \\
+    \frac{ABCD - AC\sin^2 x_1 + BC\cos^2 x_1 - AB(A+C)\cos^2 x_1}{A^2BD - A^2\sin^2 x_1 + AB\cos^2 x_1}
+\end{multline}
+\begin{multline}
+    \dot{x}_6 = \frac{1}{B}{x_2}^2\cos x_1 + \frac{A\sin x_1}{ABD-A\sin^2 x_1 + B\cos^2 x_1} \left[\frac{A-B}{AB}{x_2}^2\sin x_1\cos x_1 \right.\\ \left.-\frac{A+C}{A}\cos x_1 \right]
+\end{multline}
+
+Dado que el sistema no es lineal, no es posible avanzar en la representación de espacio de estados, dado que no tiene representación matricial. Por tanto la equivalente representación es:
+\begin{flushleft}
+\begin{equation}
+    \dot{x}_1 = x_2
+\end{equation}
+\begin{equation}
+    \dot{x}_2 = \frac{AB}{ABD - A\sin^2 x_1 + B\cos^2 x_1} \left[ \frac{A-B}{AB}{x_2}^2\sin x_1\cos x_1 -\frac{A+C}{A}\cos x_1\right]
+\end{equation}
+\begin{equation}
+    \dot{x}_3 = x_4
+\end{equation}
+\begin{multline}
+    \dot{x}_4 = \frac{ABD - A\sin^2 x_1 + B\cos^2 x_1 + (A^2-AB)\cos^2 x_1}{A^2BD-A^2\sin^2 x_1 + AB\cos^2 x_1} {x_2}^2\sin x_1 + \\
+    \frac{ABCD - AC\sin^2 x_1 + BC\cos^2 x_1 - AB(A+C)\cos^2 x_1}{A^2BD - A^2\sin^2 x_1 + AB\cos^2 x_1}
+\end{multline}
+\begin{equation}
+    \dot{x}_5 = x_6
+\end{equation}
+\begin{multline}
+    \dot{x}_6 = \frac{1}{B}{x_2}^2\cos x_1 + \frac{A\sin x_1}{ABD-A\sin^2 x_1 + B\cos^2 x_1} \left[\frac{A-B}{AB}{x_2}^2\sin x_1\cos x_1 \right.\\ \left.-\frac{A+C}{A}\cos x_1 \right]
+\end{multline}
+\end{flushleft}
 
 \item Aquí se medirán simultáneamente todas las salidas con sendos sensores, e incluso las mismas entradas (pero con sensores diferentes y únicos (¡dedicación exclusiva para cada entrada!)).
 
@@ -400,6 +446,41 @@ Inspeccionando las ecuaciones vemos que todas son de orden 3 a exepcion de la te
 \end{split}
 \end{equation}
 
+Identificando las 6 variables de estado del sistema. necesitamos hacer cambios de variable para tener las variables de fase:
+
+\begin{equation}
+\begin{split}
+    y_1 &= \dot{x}_1 \\
+    y_2 &= \dot{x}_2 \\
+    y_3 &= \dot{x}_3 \\
+    y_4 &= \dot{x}_4 \\
+    y_5 &= \dot{x}_5 \\
+    y_6 &= \dot{x}_6 \\
+    z_1 &= \dot{y}_1 \\
+    z_2 &= \dot{y}_2 \\
+    \mathbf{z_3} &\mathbf{= \dot{y}_3} \\ %Esta negrilla cambia el tipo de letra
+    z_4 &= \dot{y}_4 \\
+    z_5 &= \dot{y}_5 \\
+    z_6 &= \dot{y}_6  \label{2.c.CambioV}
+\end{split} 
+\end{equation}
+Haciendo los respectivos cambios de variable de (\ref{2.c.CambioV}) en (\ref{2.c:despejada}) nos queda: 
+
+\begin{equation}
+\begin{split}
+    {\dot{z}}_1\ &=\ \frac{1}{12}z_2\ -\ \frac{t}{12}y_5\ +\frac{5}{12}y_4+ \frac{1}{12} \sin(0.1t)  \\
+    {\dot{z}}_2\ &= \ t\ z_6\ -\ 18y_2\ - 4x_3 - x_1 - t \cosh(0.5) \\
+    {\dot{y}}_5\ &=\ \frac{t^{-1}}{6}y_1-\ \frac{8}{6}z_2+\ \frac{3}{6}\tan(t + 1)x_6 \\
+    {\dot{z}}_4\ &=\ \frac{1}{5}z_2\ +\ \frac{7}{5}\mathbf{{\dot{y}}_3}\ +\frac{1}{5}\cos(t)x_1\ -\frac{0.1}{5}  \\ 
+    {\dot{z}}_5\ &=\ \frac{1}{12}z_1-\ \frac{t^{3}}{12}y_2-\ \frac{4}{12}x_4-\ \frac{1}{12}x_3\cosh(t)  \\
+    {\dot{z}}_6\ &= - \frac{e^{-5t}}{t} \mathbf{{\dot{y}}_3}-\ \frac{3}{t}{y}_1-\ \frac{8}{t}x_5+\ \tan(t + 2)
+    \label{2.c:remplazada}
+\end{split}
+\end{equation}
+
+Notece que al no existir $\dddot{x}_3$ no existe $\dot{z}_3$ esto implica no se pueda usar la ecuación resaltada en (\ref{2.c.CambioV}) ya que $x_3$ no se puede bajar de grado mas.Es un sistema de 17 ecuaciones y 18 incógnitas. Esto nos imposibilita a sacar la matriz de Espacio de estados
+
+
 
 \end{enumerate}
 \item Linealice los siguientes modelos (en caso de ser no-lineales) y resuélvanlos numéricamente. Definan las condiciones de solución del sistema. Grafiquen las soluciones del sistema no-lineal y el
@@ -466,22 +547,29 @@ Al resolver obtenemos que
     \label{senh}
 \end{equation}
 
-El nuevo modelo obtenido al reemplazar (\ref{cosh}) y (\ref{senh}) en (\ref{nuevomod3a}) es:
+Reemplazamos (\ref{cosh}) y (\ref{senh}) en (\ref{nuevomod3a1}):
 
 \begin{equation}
 \begin{split}
     \dddot{\delta x_1}-\ddot{\delta x_1}+18\ddot{\delta x_2}+4\delta x_1 +\delta x_2 +74.203\delta x_1+99.21 &= 0 \\ \dddot{\delta x_2}-\ddot{\delta x_2}+18\ddot{\delta x_1}+4\delta x_2 +\delta x_1 +74.21\delta x_2+99.203 &= 0 
 \end{split}
-\label{nuevomod3a}
+\label{nuevomod3a1}
 \end{equation}
 
+Ya que $\delta x_1 = (x_1-\bar {x_1})$ y $\delta x_2 = (x_2-\bar{x_2})$ entonces el nuevo modelo linealizado sería 
+\begin{equation}
+\begin{split}
+    \dddot{x_1}-\ddot{x_1}+18\ddot{x_2}+4x_1 + x_2 +78.203 x_1-296.805 &= 0 \\ \dddot{x_2}-\ddot{x_2}+18\ddot{x_1}+4x_2 +x_1 +78.21 x_2+296.847 &= 0 
+\end{split}
+\label{nuevomod3afinish}
+\end{equation}
 \item $y(1)=2,\bar{y}=10$
 \begin{equation}
      \sqrt[]{y}\frac{dy}{dx}+y^{1.5}-1 = 0
 \end{equation}
 % SOLUCIÓN
 \textbf{Solución:}
-El modelo es no lineal debido al producto la raíz de la variable dependiente con la derivada de la variable dependiente y por el término $y^1.5$.
+El modelo es no lineal debido al producto la raíz de la variable dependiente con la derivada de la variable dependiente y por el término $y^{1.5}$.
 Para ver mejor el sistema cambiamos la notación así:
 
 \begin{equation}
@@ -530,8 +618,37 @@ Reemplazando (\ref{3by-1/2}) en (\ref{3bdivid}) obtenemos el modelo equivalente 
 \end{equation}
 
 % SOLUCIÓN
+\textbf{Solución:}
+El modelo es no lineal debido a
+Para linealizar el modelo, tomamos cada función no lineal dentro de el mismo, y procedemos a linealizarlas por separado haciendo uso de las series de Taylor:
 
+\begin{multline}
+    \notag
+    \cos((x+y)^z)\simeq \cos((x+y)^z)-z(x+y)^{z-1} \sin((x+y)^z)(x-\bar{x}) ...
+    \\...-z(x+y)^{z-1} \sin((x+y)^z)(y-\bar{y})
+    -(x+y)^z \ln(x+y) \sin((x+y)^z)(z-\bar{z})
+\end{multline}
+\begin{multline}
+    \notag
+    e^{(x+y+z)^2}\simeq e^{(x+y+z)^2}+2(x+y+z)e^{(x+y+z)^2}(x-\bar{x})+2(x+y+z)e^{(x+y+z)^2}(y-\bar{y})...
+    \\...+2(x+y+z)e^{(x+y+z)^2}(z-\bar{z})
+\end{multline}
+\begin{multline}
+    \notag
+    \cosh(\sqrt{x+y+z})\simeq \cosh(\sqrt{x+y+z})+\frac{\sinh(\sqrt{x+y+z})}{2\sqrt{x+y+z}}(x-\bar{x})...
+    \\...+\frac{\sinh(\sqrt{x+y+z})}{2\sqrt{x+y+z}}(y-\bar{y})+\frac{\sinh(\sqrt{x+y+z})}{2\sqrt{x+y+z}}(z-\bar{z})
+\end{multline}
+\begin{multline}
+    \notag
+    \left[\frac{x+y}{z}\right]^x\simeq \left[\frac{x+y}{z}\right]^x +\left[\frac{x+y}{z}\right]^x \left(\ln\left[\frac{x+y}{z}\right]^x+\frac{x}{x+y}\right)(x-\bar{x})+\frac{x\left[\frac{x+y}{z}\right]^x}{x+y}(y-\bar{y})...
+    \\ ...-\frac{x\left[\frac{x+y}{z}\right]^x}{z}(z-\bar{z})
+\end{multline}
 
+ Al reemplazar en los puntos de operación $ \bar{x} = \bar{y} = \bar{z} = 1$, obtenemos: 
+\begin{multline}
+    \notag
+    \cos((x+y)^z)\simeq 
+\end{multline}
 
 
 
