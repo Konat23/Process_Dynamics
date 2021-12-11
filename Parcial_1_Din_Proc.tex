@@ -65,12 +65,31 @@ $L = 1.21$; $g = 10$; $a_1 = 2.5$; $a_2 = 5.0$. Asuma condiciones iniciales dife
 
 % SOLUCIÓN
 \textbf{Solución}
+
 Para solucionar el sistema se usó MATLAB y Simulink, se establecieron las siguientes condiciones iniciales:
 $\varphi(0) = 2$; $\dot{\varphi}(0) = 1$; $\mu(0) = 1$; $\dot{\mu}(0) = 2$; $\gamma(0) = 3$; $\dot{\gamma}(0) = 1$.
 
+\begin{figure}[H]
+    \centering
+    \hspace{1cm}
+    \begin{subfigure}[h]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{plots 1a/grafico de varphi.png}
+        \caption{\centering Gráfica $\varphi(t)$}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{plots 1a/grafico de mu.png}
+        \caption{\centering Gráfica $\mu(t)$}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{plots 1a/grafico de gamma.png}
+        \caption{\centering Gráfica $\gamma(t)$}
+    \end{subfigure}
+    \caption{Gráficas solución del sistema}
+    \label{fig:graficas solucion del sistema 1a}
+\end{figure}
 
-
-
+Vemos que la variable $\varphi(t)$ tiene un comportamiento periódico de una forma sinusoidal, mientras que la variable $\mu(t)$ tiende a una parábola. A diferencia, la variable $\gamma(t)$ parece estar compuesta por una componente periódica y otra lineal con el tiempo.
+Estas descripciones dadas, son aproximaciones dadas a lo visto en las gráficas de la figura \ref{fig:graficas solucion del sistema 1a}, y el comportamiento real de las variables puede variar para rangos de tiempo diferente o condiciones iniciales distintas.
 
 
 
@@ -557,12 +576,29 @@ Reemplazamos (\ref{cosh}) y (\ref{senh}) en (\ref{nuevomod3a1}):
 Ya que $\delta x_1 = (x_1-\bar {x_1})$ y $\delta x_2 = (x_2-\bar{x_2})$ entonces el nuevo modelo linealizado sería 
 \begin{equation}
 \begin{split}
-    \dddot{x_1}-\ddot{x_1}+18\ddot{x_2}+4x_1 + x_2 +78.203 x_1-296.805 &= 0 \\ \dddot{x_2}-\ddot{x_2}+18\ddot{x_1}+4x_2 +x_1 +78.21 x_2+296.847 &= 0 
+    \dddot{x_1}-\ddot{x_1}+18\ddot{x_2}+4x_1 + x_2 +78.203 x_1-296.805 &= 0 \\ \dddot{x_2}-\ddot{x_2}+18\ddot{x_1}+4x_2 +x_1 +78.21 x_2-296.847 &= 0 
 \end{split}
 \label{nuevomod3afinish}
 \end{equation}
 
 Al simular ambos modelos en matlab con la condición inicial dada obtuvimos la siguiente gráfica:
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[H]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{plots3/plots3a/3ax_1.png}
+        \caption{\centering Soluciones para $x_1$}
+        \label{}
+    \end{subfigure}
+    \hspace{0.5cm}
+    \begin{subfigure}[H]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{plots3/plots3a/3ax_2.png}
+        \caption{\centering Soluciones para $x_2$}
+        \label{fig:config 2}
+    \end{subfigure}
+    \caption{Soluciones para el modelo del punto 3a}
+\end{figure}
+
+Las gráficas muestran las soluciones numéricas para la variable $x_1$ y $x_2$ del modelo linealizado y no linealizado, estas gráficas están definidas hasta t=0.6 debido a que hubo problemas con la compilación después de ese valor ya que el resultado de una de las derivadas del modelo tendía a infinito. Sin embargo en el rango que se pudo graficar podemos observar que las curvas de los resultados son bastante diferentes, por lo que podemos llegar a la conclusión de que, si bien pudimos volver lineal el modelo, los resultados de las variables se ven afectados gravemente por esta linealización.
 
 
 
@@ -623,7 +659,7 @@ Al simular ambos modelos en matlab con la condición inicial dada obtuvimos la s
     \label{3b}
 \end{figure}
 
-Las gráficas muestran las soluciones numéricas del modelo linealizado y no linealizado, estas gráficas están definidas desde x=1 debido a la condición inicial definida para el ejercicio, vemos que el tamaño las curvas de los resultados son diferentes entre ellas, sin embargo, tienen ``forma similar". También observamos que ambas cumplen la condición que planteamos de $y\neq 0$. 
+La gráfica muestra las soluciones numéricas del modelo linealizado y no linealizado, esta gráfica está definida desde x=1 debido a la condición inicial definida para el ejercicio, vemos que el tamaño las curvas de los resultados son diferentes entre ellas, sin embargo, tienen ``forma similar". También observamos que ambas cumplen la condición que planteamos de $y\neq 0$. 
 
 \item Para este caso solamente linealizarlo. Punto de operación: $ \bar{x} = \bar{y} = \bar{z} = 1$
 \begin{equation}
@@ -679,7 +715,9 @@ Para linealizar el modelo, tomamos cada función no lineal dentro de el mismo, y
 \end{equation}
 Reemplazamos (\ref{p3cec1}),(\ref{p3cec2}),(\ref{p3cec3}) y (\ref{p3cec4}) en (\ref{p3cec})
 
-
+\begin{equation}
+    f(x,y,z)\simeq 48614.417686x+48615.80398y+48618.452723z-137750.921203
+\end{equation}
 
 \end{enumerate}
 \item Apliquen el método de la impedancia (si es posible) para modelar el siguiente sistema. En caso de no poderse, explicar claramente el por qué no.
