@@ -18,10 +18,10 @@
 
 \title{\protect\vspace{-0.5cm}\protect\includegraphics[width =6cm]{Logo UIS.png} \\
 Primer Parcial - Dinámica de Procesos}
-\author{Sebastián García Angarita - 2191472\and
-        Juan Sebastián Guerrero Peña - 2190435\and
-        Rafael Santiago Suarez Gil - 2190433\and
-        Luis Fernando Romero Rojas - 2191663 \\ \\
+\author{Juan Sebastián Guerrero Peña - 2190435 - B1\and
+        Luis Fernando Romero Rojas - 2191663 - B1\and
+        Rafael Santiago Suarez Gil - 2190433 - B2\and
+        Sebastián García Angarita - 2191472 - B2\\ \\
         \textit{Escuela de Ingeniería Eléctrica, Electrónica y Telecomunicaciones} \\
         \textit{Universidad Industrial de Santander}\\
         Bucaramanga, Colombia \\}
@@ -67,7 +67,6 @@ $L = 1.21$; $g = 10$; $a_1 = 2.5$; $a_2 = 5.0$. Asuma condiciones iniciales dife
 \textbf{Solución}
 Para solucionar el sistema se usó MATLAB y Simulink, se establecieron las siguientes condiciones iniciales:
 $\varphi(0) = 2$; $\dot{\varphi}(0) = 1$; $\mu(0) = 1$; $\dot{\mu}(0) = 2$; $\gamma(0) = 3$; $\dot{\gamma}(0) = 1$.
-
 
 
 
@@ -250,28 +249,27 @@ Remplazando ahora $\dot{x}_2$ en $\dot{x}_4$ y $\dot{x}_6$
     \dot{x}_6 = \frac{1}{B}{x_2}^2\cos x_1 + \frac{A\sin x_1}{ABD-A\sin^2 x_1 + B\cos^2 x_1} \left[\frac{A-B}{AB}{x_2}^2\sin x_1\cos x_1 \right.\\ \left.-\frac{A+C}{A}\cos x_1 \right]
 \end{multline}
 
-Dado que el sistema no es lineal, no es posible avanzar en la representación de espacio de estados, dado que no tiene representación matricial. Por tanto la equivalente representación es:
-\begin{flushleft}
-\begin{equation}
+Dado que el sistema no es lineal, no es posible avanzar en la representación de espacio de estados, dado que no tiene representación matricial. Por tanto la representación final del sistema es:
+
+\begin{equation*}
     \dot{x}_1 = x_2
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
     \dot{x}_2 = \frac{AB}{ABD - A\sin^2 x_1 + B\cos^2 x_1} \left[ \frac{A-B}{AB}{x_2}^2\sin x_1\cos x_1 -\frac{A+C}{A}\cos x_1\right]
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
     \dot{x}_3 = x_4
-\end{equation}
-\begin{multline}
+\end{equation*}
+\begin{multline*}
     \dot{x}_4 = \frac{ABD - A\sin^2 x_1 + B\cos^2 x_1 + (A^2-AB)\cos^2 x_1}{A^2BD-A^2\sin^2 x_1 + AB\cos^2 x_1} {x_2}^2\sin x_1 + \\
     \frac{ABCD - AC\sin^2 x_1 + BC\cos^2 x_1 - AB(A+C)\cos^2 x_1}{A^2BD - A^2\sin^2 x_1 + AB\cos^2 x_1}
-\end{multline}
-\begin{equation}
+\end{multline*}
+\begin{equation*}
     \dot{x}_5 = x_6
-\end{equation}
-\begin{multline}
+\end{equation*}
+\begin{multline*}
     \dot{x}_6 = \frac{1}{B}{x_2}^2\cos x_1 + \frac{A\sin x_1}{ABD-A\sin^2 x_1 + B\cos^2 x_1} \left[\frac{A-B}{AB}{x_2}^2\sin x_1\cos x_1 \right.\\ \left.-\frac{A+C}{A}\cos x_1 \right]
-\end{multline}
-\end{flushleft}
+\end{multline*}
 
 \item Aquí se medirán simultáneamente todas las salidas con sendos sensores, e incluso las mismas entradas (pero con sensores diferentes y únicos (¡dedicación exclusiva para cada entrada!)).
 
@@ -478,7 +476,7 @@ Haciendo los respectivos cambios de variable de (\ref{2.c.CambioV}) en (\ref{2.c
 \end{split}
 \end{equation}
 
-Notece que al no existir $\dddot{x}_3$ no existe $\dot{z}_3$ esto implica no se pueda usar la ecuación resaltada en (\ref{2.c.CambioV}) ya que $x_3$ no se puede bajar de grado mas.Es un sistema de 17 ecuaciones y 18 incógnitas. Esto nos imposibilita a sacar la matriz de Espacio de estados
+Notece que al no existir $\dddot{x}_3$ no existe $\dot{z}_3$ esto implica no se pueda usar la ecuación resaltada en (\ref{2.c.CambioV}) ya que $x_3$ no se puede bajar mas de grado.Es un sistema de 17 ecuaciones y 18 incógnitas. Esto nos imposibilita a sacar la matriz de Espacio de estados. y por tanto no se puede derminar \textbf{represetancion de espacio de estados}
 
 
 
@@ -563,6 +561,11 @@ Ya que $\delta x_1 = (x_1-\bar {x_1})$ y $\delta x_2 = (x_2-\bar{x_2})$ entonces
 \end{split}
 \label{nuevomod3afinish}
 \end{equation}
+
+Al simular ambos modelos en matlab con la condición inicial dada obtuvimos la siguiente gráfica:
+
+
+
 \item $y(1)=2,\bar{y}=10$
 \begin{equation}
      \sqrt[]{y}\frac{dy}{dx}+y^{1.5}-1 = 0
@@ -577,7 +580,7 @@ Para ver mejor el sistema cambiamos la notación así:
      \label{3bnotacion}
 \end{equation}
 
-Si dividimos (\ref{3bnotacion}) entre $y^{\frac{1}{2}}$ obtenemos:
+Si dividimos (\ref{3bnotacion}) entre $y^{\frac{1}{2}}$ (poniendo como condición que $y\neq0$) obtenemos:
 
 \begin{equation}
      \dot{y}+y-y^{-\frac{1}{2}} = 0
@@ -612,14 +615,27 @@ Reemplazando (\ref{3by-1/2}) en (\ref{3bdivid}) obtenemos el modelo equivalente 
     \dot{y}+1.0158y-0.4743=0
 \end{equation}
 
+Al simular ambos modelos en matlab con la condición inicial dada obtuvimos la siguiente gráfica:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{plots3/plots3b/3bmatlab.png}
+    \caption{Soluciones para el modelo del punto 3b.}
+    \label{3b}
+\end{figure}
+
+Las gráficas muestran las soluciones numéricas del modelo linealizado y no linealizado, estas gráficas están definidas desde x=1 debido a la condición inicial definida para el ejercicio, vemos que el tamaño las curvas de los resultados son diferentes entre ellas, sin embargo, tienen ``forma similar". También observamos que ambas cumplen la condición que planteamos de $y\neq 0$. 
+
 \item Para este caso solamente linealizarlo. Punto de operación: $ \bar{x} = \bar{y} = \bar{z} = 1$
 \begin{equation}
     f(x,y,z)=\cos(x+y)^z+e^{(x+y+z)^2}-\cosh{\sqrt{x+y+z}-\left[\frac{x+y}{z}\right]^x}
+    \label{p3cec}
 \end{equation}
 
 % SOLUCIÓN
-\textbf{Solución:}
-El modelo es no lineal debido a
+\textbf{Solución}
+
+El modelo es no lineal debido a todos sus términos.
+
 Para linealizar el modelo, tomamos cada función no lineal dentro de el mismo, y procedemos a linealizarlas por separado haciendo uso de las series de Taylor:
 
 \begin{multline}
@@ -645,10 +661,23 @@ Para linealizar el modelo, tomamos cada función no lineal dentro de el mismo, y
 \end{multline}
 
  Al reemplazar en los puntos de operación $ \bar{x} = \bar{y} = \bar{z} = 1$, obtenemos: 
-\begin{multline}
-    \notag
-    \cos((x+y)^z)\simeq 
-\end{multline}
+\begin{equation}
+    \cos((x+y)^z)\simeq 2.663001-0.909297x-0.909297y-1.260554z
+    \label{p3cec1}
+\end{equation}
+\begin{equation}
+     e^{(x+y+z)^2}\simeq 48618.50357x+48618.50357y+48618.50357z-137752.4268
+     \label{p3cec2}
+\end{equation}
+\begin{equation}
+     \cosh(\sqrt{x+y+z})\simeq 0.790293x+0.790293y+0.790293z+0.543698
+     \label{p3cec3}
+\end{equation}
+\begin{equation}
+     \left[\frac{x+y}{z}\right]^x\simeq 2.386294x+y-2z+0.613706
+     \label{p3cec4}
+\end{equation}
+Reemplazamos (\ref{p3cec1}),(\ref{p3cec2}),(\ref{p3cec3}) y (\ref{p3cec4}) en (\ref{p3cec})
 
 
 
